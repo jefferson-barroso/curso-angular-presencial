@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
 import {IUsuario } from '../models/iusuario';
-
+import { ListUsersService } from '../services/list-users.service';
 @Component({
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
   styleUrls: ['./list-user.component.css']
 })
 export class ListUserComponent {
+
+  constructor(private userService: ListUsersService){}
   displayedColumns = ['id', 'first_name', 'last_name', 'email'];
+  dataSource:IUsuario[] = [];
+
 
   listaUsuario: IUsuario[] = [
     {
@@ -24,10 +28,11 @@ export class ListUserComponent {
     }
   ];
 
-  dataSource:IUsuario[] = [];
 
   public listarUsuarios(): void{
-    this.dataSource = this.listaUsuario;
+
+    this.userService.listarUsuarios().subscribe((dados)=>{ this.dataSource = dados;
+});
   }
 
   ngOnit(): void{
