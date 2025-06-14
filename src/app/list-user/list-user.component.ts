@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import {IUsuario } from '../models/iusuario';
 import { ListUsersService } from '../services/list-users.service';
+import { appRoutingModule } from '../app.routing.module';
+import { ListaProdutosComponent } from '../lista-produtos/lista-produtos.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
@@ -8,7 +11,7 @@ import { ListUsersService } from '../services/list-users.service';
 })
 export class ListUserComponent {
 
-  constructor(private userService: ListUsersService){}
+  constructor(private userService: ListUsersService, private router: Router){}
   displayedColumns = ['id', 'first_name', 'last_name', 'email'];
   dataSource:IUsuario[] = [];
 
@@ -38,4 +41,14 @@ export class ListUserComponent {
   ngOnit(): void{
     this.listarUsuarios;
   }
+
+abrirProdutos(): void{
+  this.router.navigate(['/produtos']);
 }
+
+irCarrinho(): void{
+  this.router.navigate(['/carrinho']);
+}
+
+}
+
